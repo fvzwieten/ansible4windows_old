@@ -1,0 +1,32 @@
+---
+- name: manage files/directories
+  hosts: all
+  vars_files:
+    - winrm_vars.yml
+
+  tasks:
+  - name: create directory with Ansible module
+    win_file:
+      path: C:\ansible\ansible-module
+      state: directory
+  
+  - name: create directory with DSC module
+    win_dsc:
+      resource_name: File
+      type: Directory
+      destinationpath: C:\ansible\dsc-module
+      ensure: present
+      
+  - name: Change ownership
+    win_owner:
+      path: C:\ansible
+      user: Administrator
+      recurse: true
+      
+  - name: set ACL's
+    win_acl:
+      path: C:\ansible
+      user: Users
+      type: Allow
+      rights: ReadAndExecute,Write,Delete
+      inherit: ContainerInherit,ObjectInherit

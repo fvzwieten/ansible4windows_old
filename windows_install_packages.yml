@@ -1,0 +1,16 @@
+---
+- name: Install packages using chocolatey
+  hosts: all
+  vars_files:
+    - winrm_vars.yml
+
+  tasks:
+  - name: install common packages
+    win_chocolatey:
+      name: '{{item}}'
+      state: present
+    with_items:
+    - sysinternals
+    - notepadplusplus
+    - googlechrome
+    - git

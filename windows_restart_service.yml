@@ -1,0 +1,12 @@
+---
+# restart a service
+- name: Restart a service
+  hosts: all
+  vars_files:
+    - winrm_vars.yml
+
+  tasks:
+  - name: Restart a service
+    win_service:
+      name: spooler
+      state: restarted

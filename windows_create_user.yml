@@ -1,0 +1,13 @@
+---
+- name: create user
+  hosts: all
+  vars_files:
+    - winrm_vars.yml
+
+  tasks:
+  - name: create a domain user
+    win_domain_user:
+      name: somebody
+      upn: somebody@ansible.local
+      groups:
+      - Domain Admins

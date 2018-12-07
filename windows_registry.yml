@@ -1,0 +1,16 @@
+---
+# Do stuff in the registry
+- name: Do stuff in the registry
+  hosts: all
+  vars_files:
+    - winrm_vars.yml
+  tasks:
+  - name: Create registry path MyCompany
+    win_regedit:
+      path: HKCU:\Software\MyCompany
+
+  - name: Add or update registry path MyCompany, with entry 'hello', and containing 'world'
+    win_regedit:
+      path: HKCU:\Software\MyCompany
+      name: hello
+      data: world
